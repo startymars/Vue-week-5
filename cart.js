@@ -41,7 +41,7 @@ const path = 'cream21'; // 請加入個人 API Path
 
 const productModal={
     //當id變動時，取得遠端資料
-    props:['id','addToCart','openModal'],
+    props:['id','addToCart','openModal','loadingId'],
     data(){
         return{
             modal:{},
@@ -60,12 +60,16 @@ const productModal={
                     this.tempProduct=res.data.product;
                     console.log(this.tempProduct);
                     this.modal.show();
+                    
                 })
                 .catch((err)=>{
-                    console.log(err.data.message);
+                    console.log(err.data);
                 })
             }
-        }
+        },
+        // loadingId(){
+        //     console.log('loadingId',this.loadingId);
+        // }
     },
     methods:{
         hide(){
@@ -127,6 +131,7 @@ const app=Vue.createApp({
             this.productId=id;
             this.loadingItem=id;
             console.log("外層傳入",this.productId);
+            console.log("loading",this.loadingItem);
         },
         addToCart(product_id,qty=1){ //當沒有參數傳入帶入預設值
             const data={
